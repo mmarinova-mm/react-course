@@ -28,9 +28,9 @@ class Page extends React.Component {
         this.sortPosts();
     };
 
-    sortPosts() {
+    sortPosts = () => {
         this.setState({posts: this.state.posts.sort((a, b) => (b.votesCount - a.votesCount))});
-    }
+    };
 
     render() {
         return (
@@ -41,37 +41,33 @@ class Page extends React.Component {
     }
 }
 
-class PostList extends React.Component {
-    render() {
-        return (
-            <div>
-                <h3>Posts</h3>
-                {this.props.posts.length === 0 ? (
-                    <span>No posts available</span>
-                ) : (
+function PostList({posts, upvote}) {
+    return (
+        <div>
+            <h3>Posts</h3>
+            {
+                posts.length === 0 ?
+                    <span>No posts available</span> :
                     <div>
-                        {this.props.posts.map(post => (
+                        {posts.map(post => (
                             <Post post={post}>
-                                <button onClick={() => this.props.upvote(post)}>Upvote</button>
+                                <button onClick={() => upvote(post)}>Upvote</button>
                             </Post>
                         ))}
                     </div>
-                )}
-            </div>
-        );
-    };
+            }
+        </div>
+    );
 }
 
-class Post extends React.Component {
-    render() {
-        return (
-            <div className="card" key={this.props.post.id}>
-                <h3>{this.props.post.title}</h3>
-                <span>{this.props.post.votesCount}</span>
-                {this.props.children}
-            </div>
-        );
-    }
+function Post({children, post}) {
+    return (
+        <div className="card" key={post.id}>
+            <h3>{post.title}</h3>
+            <span>{post.votesCount}</span>
+            {children}
+        </div>
+    );
 }
 
 export default Page;
