@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-class Page extends React.Component {
+class PageInit extends React.Component {
     state = {
         votes: [],
         posts: this.props.posts,
@@ -70,4 +70,4 @@ function Post({children, post}) {
     );
 }
 
-export default Page;
+export default PageInit;

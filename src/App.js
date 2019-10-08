@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Page from './Page';
+import Page from './Page.tsx';
 import posts from './data';
 
 const App = () => {
     return (
-        <Page posts={posts}/>
+        <Page initPosts={posts}/>
     );
 }
 
