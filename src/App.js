@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
-import Page from './Page.tsx';
-import posts from './data';
+import Page from './Components/Page';
+import pizzas from './data';
 
-const App = () => {
+export default function App() {
     return (
-        <Page initPosts={posts}/>
+        <Page initData={pizzas}/>
     );
 }
-
-export default App;
