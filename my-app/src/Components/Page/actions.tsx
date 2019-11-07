@@ -9,9 +9,6 @@ export function decrementPizzaVotes(pizzaId: number) {
 export function sortPizzas() {
     return {type: SORT_PIZZAS};
 }
-export function indexPizzas() {
-    return {type: INDEX_PIZZAS};
-}
 export function incrementPizzaVotes(pizzaId: number) {
     return {type: INCREMENT_VOTES, id: pizzaId};
 }

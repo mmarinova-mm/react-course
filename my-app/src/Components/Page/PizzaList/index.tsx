@@ -7,13 +7,13 @@ interface IPizzaListProps {
     upvote: Function,
 }
 
-export default function PizzaList({pizzas, upvote}: IPizzaListProps) {
+export default function PizzaList({pizzas = [], upvote}: IPizzaListProps) {
     return (
         <div>
             <h3>Posts</h3>
             {
                 pizzas.length === 0 ?
-                    <span>No posts available</span> :
+                    <span>No pizzas available</span> :
                     <div>
                         {pizzas.map(pizza => (
                             <Pizza pizza={pizza}>
