@@ -2,16 +2,16 @@ import React from 'react';
 import './App.css';
 import Page from './Components/Page';
 import pizzas from './data';
-import {DECREMENT_VOTES, INCREMENT_VOTES, INDEX_PIZZAS, SORT_PIZZAS, sortPizzas} from "./Components/Page/actions";
+import {DECREMENT_VOTES, INCREMENT_VOTES, SORT_PIZZAS, sortPizzas} from "./Components/Page/actions";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 const initialState = {
     pizzas: [],
 };
 
 function pizzaActions(state = initialState, action) {
-    console.log(action);
     switch (action.type) {
         case INCREMENT_VOTES:
             Object.assign({}, state,{
@@ -33,7 +33,7 @@ function pizzaActions(state = initialState, action) {
     }
 }
 
-const store = createStore(pizzaActions, {pizzas: pizzas});
+const store = createStore(pizzaActions, {pizzas: pizzas}, composeWithDevTools());
 
 export default function App() {
     store.dispatch(sortPizzas());
