@@ -3,7 +3,7 @@ import './App.css';
 import Page from './Components/Page';
 import pizzas from './data';
 import {DECREMENT_VOTES, INCREMENT_VOTES, SORT_PIZZAS, sortPizzas} from "./Components/Page/actions";
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 
@@ -11,29 +11,24 @@ const initialState = {
     pizzas: [],
 };
 
-function pizzaActions(state = initialState, action) {
+function pizzaActions(pizzas = initialState, action) {
     switch (action.type) {
         case INCREMENT_VOTES:
-            Object.assign({}, state,{
-                pizzas: state.pizzas.map(p => p.id === action.id ? {...p, votesCount: p.votesCount++} : p)
-            });
-            return state;
+            return pizzas.map(p => p.id === action.id ? {...p, votesCount: p.votesCount + 1} : p);
         case DECREMENT_VOTES:
-            Object.assign({}, state, {
-                pizzas: state.pizzas.map(p => p.id === action.id ? {...p, votesCount: p.votesCount--} : p)
-            });
-            return  state;
+            return pizzas.map(p => p.id === action.id ? {...p, votesCount: p.votesCount - 1} : p);
         case SORT_PIZZAS:
-            Object.assign({}, state, {
-                pizzas: state.pizzas.sort((a, b) => (b.votesCount - a.votesCount))
-            });
-            return state;
+            return pizzas.sort((a, b) => (b.votesCount - a.votesCount));
         default:
-            return state;
+            return pizzas;
     }
 }
 
-const store = createStore(pizzaActions, {pizzas: pizzas}, composeWithDevTools());
+function cartActions(state = initialState, action) {
+    return state;
+}
+
+const store = createStore(combineReducers({pizzas: pizzaActions, cart: cartActions}), {pizzas: pizzas}, composeWithDevTools());
 
 export default function App() {
     store.dispatch(sortPizzas());
