@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import IPizza from "./PizzaList/interfaces/IPizza";
 import PizzaList from "./PizzaList";
 import { useSelector, useDispatch } from 'react-redux';
-import {decrementPizzaVotes, incrementPizzaVotes, sortPizzas} from "./actions";
+import Cart from "./Cart";
+import {decrementPizzaVotes, incrementPizzaVotes, IPizza, sortPizzas} from "../../modules/pizzas";
 
 export default function Page() {
     const dispatch = useDispatch();
@@ -22,5 +22,8 @@ export default function Page() {
         dispatch(sortPizzas());
     };
 
-    return <main><PizzaList pizzas={pizzas} upvote={upvote}/></main>;
+    return <main>
+        <PizzaList pizzas={pizzas} upvote={upvote}/>
+        <Cart></Cart>
+    </main>;
 }

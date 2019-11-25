@@ -1,6 +1,7 @@
 import React from "react";
 import Pizza from "./Pizza";
-import IPizza from "./interfaces/IPizza";
+import {IPizza} from "../../../modules/pizzas";
+import {addToCart} from "../../../modules/cart";
 
 interface IPizzaListProps {
     pizzas: Array<IPizza>,
@@ -18,6 +19,7 @@ export default function PizzaList({pizzas = [], upvote}: IPizzaListProps) {
                         {pizzas.map(pizza => (
                             <Pizza pizza={pizza}>
                                 <button onClick={() => upvote(pizza)}>Upvote</button>
+                                <button onClick={() => addToCart(pizza)}>Add</button>
                             </Pizza>
                         ))}
                     </div>
