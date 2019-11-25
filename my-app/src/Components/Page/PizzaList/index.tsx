@@ -2,6 +2,7 @@ import React from "react";
 import Pizza from "./Pizza";
 import {IPizza} from "../../../modules/pizzas";
 import {addToCart} from "../../../modules/cart";
+import {useDispatch} from "react-redux";
 
 interface IPizzaListProps {
     pizzas: Array<IPizza>,
@@ -9,6 +10,8 @@ interface IPizzaListProps {
 }
 
 export default function PizzaList({pizzas = [], upvote}: IPizzaListProps) {
+    const dispatch = useDispatch();
+
     return (
         <div>
             <h3>Posts</h3>
@@ -19,7 +22,7 @@ export default function PizzaList({pizzas = [], upvote}: IPizzaListProps) {
                         {pizzas.map(pizza => (
                             <Pizza pizza={pizza}>
                                 <button onClick={() => upvote(pizza)}>Upvote</button>
-                                <button onClick={() => addToCart(pizza)}>Add</button>
+                                <button onClick={() => dispatch(addToCart(pizza))}>Add</button>
                             </Pizza>
                         ))}
                     </div>
