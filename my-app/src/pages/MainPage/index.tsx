@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {decrementPizzaVotes, incrementPizzaVotes, IPizza, sortPizzas} from "../../modules/pizzas";
 import PizzaList from '../../components/PizzaList';
 import Cart from '../../components/Cart';
+import CheckoutForm from "../../components/CheckoutForm";
 
 
 export default function MainPage() {
@@ -25,6 +26,7 @@ export default function MainPage() {
 
     return <main>
         <PizzaList pizzas={pizzas} upvote={upvote}/>
-        <Cart></Cart>
+        <Cart/>
+        <CheckoutForm/>
     </main>;
 }
