@@ -1,4 +1,5 @@
 import {IAction} from "./cart";
+import {createReducer} from "redux-create-reducer";
 
 export const INCREMENT_VOTES = 'PIZZA_INCREMENT_VOTES';
 export const DECREMENT_VOTES = 'PIZZA_DECREMENT_VOTES';
@@ -23,15 +24,14 @@ export interface IPizza {
     votesCount: number;
 }
 
-export function pizzaReducer(pizzas: IPizza[] = [], action: IAction) {
-    switch (action.type) {
-        case INCREMENT_VOTES:
-            return pizzas.map(p => p.id === action.payload ? {...p, votesCount: p.votesCount + 1} : p);
-        case DECREMENT_VOTES:
-            return pizzas.map(p => p.id === action.payload ? {...p, votesCount: p.votesCount - 1} : p);
-        case SORT_PIZZAS:
-            return pizzas.sort((a, b) => (b.votesCount - a.votesCount));
-        default:
-            return pizzas;
+export const pizzaReducer = createReducer<IPizza[], IAction>([], {
+    [INCREMENT_VOTES]: (pizzas: IPizza[] = [], action: IAction) => {
+        return pizzas.map(p => p.id === action.payload ? {...p, votesCount: p.votesCount + 1} : p);
+    },
+    [DECREMENT_VOTES]: (pizzas: IPizza[] = [], action: IAction) => {
+        return pizzas.map(p => p.id === action.payload ? {...p, votesCount: p.votesCount - 1} : p);
+    },
+    [SORT_PIZZAS]: (pizzas: IPizza[] = [], action: IAction) => {
+        return pizzas.sort((a, b) => (b.votesCount - a.votesCount));
     }
-}
+});

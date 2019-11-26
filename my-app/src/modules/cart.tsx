@@ -1,4 +1,5 @@
 import {IPizza} from "./pizzas";
+import {createReducer} from "redux-create-reducer";
 
 export const CART_ADD = 'CART_ADD';
 export const CART_REMOVE = 'CART_REMOVE>';
@@ -29,18 +30,19 @@ export function removeFromCart(pizza: IPizza) {
     }
 }
 
-export function cartReducer(cartItems: ICart = [], action: IAction) {
-    switch (action.type) {
-        case CART_ADD:
-            if (cartItems.find(item => item.itemId === action.payload)) {
-                return cartItems.map(item => item.itemId === action.payload ? {...item, count: item.count + 1} : item);
-            } else {
-                return [...cartItems, {itemId: action.payload, count: 1}]
-            }
-        case CART_REMOVE:
-            const updatedItems = cartItems.map(item => item.itemId === action.payload ? (item.count === 1 ? null : {...item, count: item.count - 1}) : item);
-            return updatedItems.filter(item => item !== null)
-        default:
-            return cartItems;
+export const cartReducer = createReducer<ICartItem[], IAction>([], {
+    [CART_ADD]: (cartItems: ICart, action: IAction) => {
+        if (cartItems.find(item => item.itemId === action.payload)) {
+            return cartItems.map(item => item.itemId === action.payload ? {...item, count: item.count + 1} : item);
+        } else {
+            return [...cartItems, {itemId: action.payload, count: 1}]
+        }
+    },
+    [CART_REMOVE]: (cartItems: ICart, action: IAction) => {
+        const updatedItems = cartItems.map(item => item.itemId === action.payload ? {
+            ...item,
+            count: item.count - 1
+        } : item);
+        return updatedItems.filter(item => item.count !== 0)
     }
-}
+});
