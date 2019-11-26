@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import PizzaList from "./PizzaList";
 import { useSelector, useDispatch } from 'react-redux';
-import Cart from "./Cart";
 import {decrementPizzaVotes, incrementPizzaVotes, IPizza, sortPizzas} from "../../modules/pizzas";
+import PizzaList from '../../components/PizzaList';
+import Cart from '../../components/Cart';
 
-export default function Page() {
+
+export default function MainPage() {
     const dispatch = useDispatch();
     const [votes, setVotes] = useState<number[]>([]);
     const pizzas = useSelector((state: any) => {

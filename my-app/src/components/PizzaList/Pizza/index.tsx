@@ -1,5 +1,5 @@
 import React from "react";
-import {IPizza} from "../../../../modules/pizzas";
+import {IPizza} from "../../../modules/pizzas";
 
 interface IPizzaProps {
     children: React.ReactNode,

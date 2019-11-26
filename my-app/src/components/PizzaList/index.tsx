@@ -1,7 +1,7 @@
 import React from "react";
 import Pizza from "./Pizza";
-import {IPizza} from "../../../modules/pizzas";
-import {addToCart} from "../../../modules/cart";
+import {IPizza} from "../../modules/pizzas";
+import {addToCart} from "../../modules/cart";
 import {useDispatch} from "react-redux";
 
 interface IPizzaListProps {

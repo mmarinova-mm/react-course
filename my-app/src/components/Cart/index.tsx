@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {ICartItem, removeFromCart} from "../../../modules/cart";
-import {IPizza} from "../../../modules/pizzas";
+import {ICartItem, removeFromCart} from "../../modules/cart";
+import {IPizza} from "../../modules/pizzas";
 
 export default function Cart() {
     const items = useSelector(getCart);
