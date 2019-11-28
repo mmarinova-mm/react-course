@@ -5,7 +5,6 @@ import PizzaList from '../../components/PizzaList';
 import Cart from '../../components/Cart';
 import CheckoutForm from "../../components/CheckoutForm";
 
-
 export default function MainPage() {
     const dispatch = useDispatch();
     const [votes, setVotes] = useState<number[]>([]);
