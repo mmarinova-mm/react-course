@@ -24,6 +24,7 @@ export function addToCart(pizza: IPizza) {
 }
 
 export function removeFromCart(pizza: IPizza) {
+    console.log(pizza);
     return {
         type: CART_REMOVE,
         payload: pizza.id
