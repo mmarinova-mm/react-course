@@ -3,6 +3,8 @@ import Pizza from "./Pizza";
 import {IPizza} from "../../modules/pizzas";
 import {addToCart} from "../../modules/cart";
 import {useDispatch} from "react-redux";
+import globalStyles from '../../assets/global-styles/bootstrap.module.css';
+import cx from 'classnames';
 
 interface IPizzaListProps {
     pizzas: Array<IPizza>,
@@ -14,15 +16,19 @@ export default function PizzaList({pizzas = [], upvote}: IPizzaListProps) {
 
     return (
         <div>
-            <h3>Posts</h3>
+            <h3>Pizzas</h3>
             {
                 pizzas.length === 0 ?
                     <span>No pizzas available</span> :
                     <div>
                         {pizzas.map(pizza => (
                             <Pizza pizza={pizza}>
-                                <button onClick={() => upvote(pizza)}>Upvote</button>
-                                <button onClick={() => dispatch(addToCart(pizza))}>Add</button>
+                                <button className={cx(globalStyles.btn, globalStyles['btn-secondary'])}
+                                        onClick={() => upvote(pizza)}>Upvote
+                                </button>
+                                <button className={cx(globalStyles.btn, globalStyles['btn-primary'])}
+                                        onClick={() => dispatch(addToCart(pizza))}>Add
+                                </button>
                             </Pizza>
                         ))}
                     </div>

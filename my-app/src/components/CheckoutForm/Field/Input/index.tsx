@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import globalStyles from '../../../../assets/global-styles/bootstrap.module.css';
 
 const CONTROLS = {
     text: (props: any) => <input type='text' {...props} />,
@@ -22,8 +23,8 @@ export default function Input(props: IInputProps) {
     // @ts-ignore
     const Control = CONTROLS[props.type];
 
-    return <div>
-        <label htmlFor={props.name}>{props.name}:</label>
-        <Control {...props}/>
+    return <div className={props.type === 'confirm' ? '' : globalStyles['form-group']}>
+        <label htmlFor={props.name} className={globalStyles['text-capitalize']}>{props.name}:</label>
+        <Control className={props.type === 'confirm' ? '' : globalStyles['form-control']} {...props}/>
     </div>;
 }
